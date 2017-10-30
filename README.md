@@ -1,4 +1,4 @@
 # Alfred Workflows
 
-## [VNC - Screen Sharing](https://raw.githubusercontent.com/ljinwu/alfred-workflows/master/vnc/vnc.alfredworkflow)
-![vnc](https://raw.githubusercontent.com/ljinwu/alfred-workflows/master/vnc/vnc.png)
+## [VNC - Screen Sharing](https://github.com/ljinwu/alfred-workflows/releases/tag/vnc-v1.0)
+![vnc](https://raw.githubusercontent.com/ljinwu/alfred-workflows/master/workflow.vnc/vnc.png)

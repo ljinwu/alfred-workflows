@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ljinwu.mail</string>
+	<key>connections</key>
+	<dict>
+		<key>4743E647-5A48-4478-90D6-42755D457185</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B0EC6AF2-D81B-488D-AAFE-07D8A31D4DB9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6B331FC2-33C6-4550-AAE1-64945EE54B6A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>13293ED6-1AB8-40EF-8ABB-3320B965EE3E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A24F57DC-31DD-49E9-8813-90B01C55E536</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>612C759A-0ED9-48B7-89B9-B03F986E5FC3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B0EC6AF2-D81B-488D-AAFE-07D8A31D4DB9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE86A60A-2A1F-4D59-BA46-06D644C697BB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BD0FD44E-FAB3-4B32-9EB8-3273DE9CA986</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4743E647-5A48-4478-90D6-42755D457185</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CE86A60A-2A1F-4D59-BA46-06D644C697BB</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>jinwu liu</string>
+	<key>description</key>
+	<string>v1.0</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Mail</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  	tell application "Mail"
+		check for new mail
+	end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>612C759A-0ED9-48B7-89B9-B03F986E5FC3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>mail get</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Mail - Get New Mail</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A24F57DC-31DD-49E9-8813-90B01C55E536</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(argv) 
+{
+	var _mail = Application('Mail');
+	_mail.activate();
+
+	var _view = null;
+	var _temp = false;
+
+	if (_mail.messageViewers.length &lt;= 0)
+	{
+		_view = _mail.MessageViewer().make();
+		_view.mailboxListVisible(true);
+		_temp = true;
+	}
+	else
+	{
+		_view = _mail.messageViewers[0];
+	}
+
+	var _unread = _view.inbox.unreadCount();
+	for (var i = 0; _unread &gt; 0 &amp;&amp; i &lt; _view.messages.length; i++)
+	{
+		if (!_view.messages[i].readStatus())
+		{
+			--_unread;
+			_view.messages[i].open();
+		}
+	}
+
+	if (_temp)
+	{
+		_view.window().close();
+	}
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>13293ED6-1AB8-40EF-8ABB-3320B965EE3E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>mail unread</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Mail - Open Unread Mails</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6B331FC2-33C6-4550-AAE1-64945EE54B6A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(argv) 
+{
+	var config = JSON.parse(argv[0])
+
+	var _mail = Application('Mail');
+	var _view = _mail.OutgoingMessage().make();
+
+	var _to = new _mail.ToRecipient();
+	_to.address = config['to'];
+	_view.toRecipients.push(_to);
+
+	var _cc = new _mail.CcRecipient();
+	_cc.address = config['cc'];
+	_view.ccRecipients.push(_cc);
+
+	_view.subject = config['subject'];
+	_view.content = config['content'];
+	_view.visible = true;
+
+	_mail.activate();
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CE86A60A-2A1F-4D59-BA46-06D644C697BB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>mail template</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Mail - Send Mail From A Template</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BD0FD44E-FAB3-4B32-9EB8-3273DE9CA986</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>variables</key>
+				<dict>
+					<key>cc</key>
+					<string>cc@company.com</string>
+					<key>content</key>
+					<string>content</string>
+					<key>subject</key>
+					<string>subject</string>
+					<key>to</key>
+					<string>to@company.com</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4743E647-5A48-4478-90D6-42755D457185</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{"to":"{var:to}","cc":"{var:cc}","subject":"{var:subject}","content":"{var:content}"}</string>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B0EC6AF2-D81B-488D-AAFE-07D8A31D4DB9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>13293ED6-1AB8-40EF-8ABB-3320B965EE3E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>400</integer>
+			<key>ypos</key>
+			<integer>150</integer>
+		</dict>
+		<key>4743E647-5A48-4478-90D6-42755D457185</key>
+		<dict>
+			<key>note</key>
+			<string>Config Template Here!</string>
+			<key>xpos</key>
+			<integer>220</integer>
+			<key>ypos</key>
+			<integer>320</integer>
+		</dict>
+		<key>612C759A-0ED9-48B7-89B9-B03F986E5FC3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>400</integer>
+			<key>ypos</key>
+			<integer>20</integer>
+		</dict>
+		<key>6B331FC2-33C6-4550-AAE1-64945EE54B6A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>150</integer>
+		</dict>
+		<key>A24F57DC-31DD-49E9-8813-90B01C55E536</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>20</integer>
+		</dict>
+		<key>B0EC6AF2-D81B-488D-AAFE-07D8A31D4DB9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>320</integer>
+		</dict>
+		<key>BD0FD44E-FAB3-4B32-9EB8-3273DE9CA986</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>290</integer>
+		</dict>
+		<key>CE86A60A-2A1F-4D59-BA46-06D644C697BB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>400</integer>
+			<key>ypos</key>
+			<integer>290</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://github.com/ljinwu</string>
+</dict>
+</plist>

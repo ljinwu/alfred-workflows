@@ -7,3 +7,7 @@
 
 ## [SMB - File Sharing](https://github.com/ljinwu/alfred-workflows/releases/tag/smb-v1.0)
 ![smb](https://raw.githubusercontent.com/ljinwu/alfred-workflows/master/workflow.smb/smb.png)
+
+
+## [QQ](https://github.com/ljinwu/alfred-workflows/releases/tag/qq-v1.0)
+![smb](https://raw.githubusercontent.com/ljinwu/alfred-workflows/master/workflow.qq/qq.png)

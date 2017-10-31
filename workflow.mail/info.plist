@@ -77,7 +77,7 @@
 	<key>createdby</key>
 	<string>jinwu liu</string>
 	<key>description</key>
-	<string>v1.0</string>
+	<string>v1.1</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -211,21 +211,29 @@ end alfred_script</string>
 				<key>script</key>
 				<string>function run(argv) 
 {
-	var config = JSON.parse(argv[0])
+	var _config = JSON.parse(argv[0])
 
 	var _mail = Application('Mail');
 	var _view = _mail.OutgoingMessage().make();
 
-	var _to = new _mail.ToRecipient();
-	_to.address = config['to'];
-	_view.toRecipients.push(_to);
+	var _tos = _config['to'].split(';');
+	for (var i = 0; i &lt; _tos.length; i++)
+	{
+		var _to = new _mail.ToRecipient();
+		_to.address = _tos[i];
+		_view.toRecipients.push(_to);
+	}
 
-	var _cc = new _mail.CcRecipient();
-	_cc.address = config['cc'];
-	_view.ccRecipients.push(_cc);
+	var _ccs = _config['cc'].split(';');
+	for (var i = 0; i &lt; _ccs.length; i++)
+	{
+		var _cc = new _mail.CcRecipient();
+		_cc.address = _ccs[i];
+		_view.ccRecipients.push(_cc);
+	}
 
-	_view.subject = config['subject'];
-	_view.content = config['content'];
+	_view.subject = _config['subject'];
+	_view.content = _config['content'];
 	_view.visible = true;
 
 	_mail.activate();
@@ -273,13 +281,13 @@ end alfred_script</string>
 				<key>variables</key>
 				<dict>
 					<key>cc</key>
-					<string>cc@company.com</string>
+					<string>team@company.com;leader@company.com</string>
 					<key>content</key>
-					<string>content</string>
+					<string>version:201710311700</string>
 					<key>subject</key>
-					<string>subject</string>
+					<string>push to beta</string>
 					<key>to</key>
-					<string>to@company.com</string>
+					<string>ops@company.com</string>
 				</dict>
 			</dict>
 			<key>type</key>
